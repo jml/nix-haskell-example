@@ -17,9 +17,22 @@ Ideally, I would be able to do this as separate file which acts on the
 generated expression in `default.nix`. That way, I can leave `default.nix`
 being auto-generated, which is a nice property.
 
+## What does happen
+
+The generated package doesn't have any dependency on `pstree`.
+
+## How to reproduce
+
+```command
+$ nix-build -E 'with (import <nixpkgs> {}).pkgs; haskellPackages.callPackage ./. {}'
+$ ./result/bin/nix-haskell-example
+Running 'pstree' ...
+/bin/sh: pstree: command not found
+nix-haskell-example: callCommand: pstree (exit 127): failed
+```
+
 ## Build notes
 
 * `package.yaml` is canonical
 * `nix-haskell-example.cabal` generated with `hpack`
 * `default.nix` generated with cabal2nix
-
