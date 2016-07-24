@@ -1,0 +1,23 @@
+name: nix-haskell-example
+version: 0.1.0
+synopsis: Minimal example of runtime executable dependencies with Nix
+maintainer: Jonathan M. Lange <jml@mumak.net>
+license: Apache
+github: jml/nix-haskell-example
+category: Development
+
+ghc-options: -Wall
+default-extensions:
+  - NoImplicitPrelude
+  - OverloadedStrings
+
+dependencies:
+  - base >= 4.8 && < 5
+  - protolude >= 0.1.5
+
+executables:
+  nix-haskell-example:
+    main: Main.hs
+    source-dirs: src
+    dependencies:
+      - process
