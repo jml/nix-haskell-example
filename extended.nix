@@ -5,5 +5,9 @@ let
   example = pkgs.haskellPackages.callPackage ./. {};
 
 in haskell.lib.overrideCabal example (drv: {
-  propagatedBuildInputs = [ pstree ];
+  buildDepends = [ pkgs.makeWrapper ];
+  postInstall = ''
+    wrapProgram "$out/bin/nix-haskell-example" \
+      --prefix PATH ":" "${pstree}/bin"
+  '';
 })
